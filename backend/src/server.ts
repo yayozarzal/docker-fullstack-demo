@@ -1,9 +1,10 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 
 const server = Fastify({ logger: true });
+await server.register(cors, { origin: true });
 
 server.get('/health', async () => ({ status: 'ok' }));
-
 server.get('/api/hello', async () => ({ message: 'Hola desde Fastify + Docker!' }));
 
 const start = async () => {
@@ -15,4 +16,5 @@ const start = async () => {
     process.exit(1);
   }
 };
+
 start();
